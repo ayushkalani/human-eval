@@ -6,9 +6,9 @@ Code](https://arxiv.org/abs/2107.03374)".
 
 ## Installation
 
-Make sure to use python 3.7 or later:
+Make sure to use python 3.10 or later:
 ```
-$ conda create -n codex python=3.7
+$ conda create -n codex python=3.10
 $ conda activate codex
 ```
 
@@ -17,6 +17,26 @@ Check out and install this repository:
 $ git clone https://github.com/openai/human-eval
 $ pip install -e human-eval
 ```
+
+## Evaluation Pipeline Running Instructions
+
+usage: run-human-eval-on-models.py [-h] [--project_id PROJECT_ID] [--location LOCATION] [--model MODEL] [--model_config MODEL_CONFIG]
+
+Parse arguments for interfacing with Vertex AI.
+
+options:
+  -h, --help            show this help message and exit
+  --project_id PROJECT_ID
+                        Project ID for the Vertex AI project. Default: 'spherical-frame-413020'
+  --location LOCATION   Location for the Vertex AI resources. Default: 'us-west4'
+  --model MODEL         Model identifier for use in predictions. Default: 'models.gemini_pro.GeminiPro', Other Model 'models.code_gecko.CodeGecko'
+  --model_config MODEL_CONFIG
+                        Model configurations can be overiden using this paramter. Default: empty json {}
+
+Example of files generated with every evaluation run ->
+File with sample -> GeminiPro20240204-231057.jsonl
+File with evaluation -> GeminiPro20240204-231057.jsonl_results.jsonl
+File with evaultion results -> GeminiPro20240204-231057.jsonl_results.jsonl
 
 ## Usage
 

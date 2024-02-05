@@ -4,7 +4,7 @@ import contextlib
 import faulthandler
 import io
 import os
-import multiprocessing
+import multiprocess
 import platform
 import signal
 import tempfile
@@ -67,10 +67,10 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
             os.rmdir = rmdir
             os.chdir = chdir
 
-    manager = multiprocessing.Manager()
+    manager = multiprocess.Manager()
     result = manager.list()
 
-    p = multiprocessing.Process(target=unsafe_execute)
+    p = multiprocess.Process(target=unsafe_execute)
     p.start()
     p.join(timeout=timeout + 1)
     if p.is_alive():
