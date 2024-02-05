@@ -14,29 +14,55 @@ $ conda activate codex
 
 Check out and install this repository:
 ```
-$ git clone https://github.com/openai/human-eval
+$ git clone https://github.com/ayushkalani/human-eval
 $ pip install -e human-eval
 ```
 
+Install the Vertex AI SDK for Python
+```
+pip install --upgrade google-cloud-aiplatform
+```
+
+**Make sure you have google cloud auth from your terminal local enviroment and your project_id**
+
 ## Evaluation Pipeline Running Instructions
+
+Evaluation pipeline entry point is run-human-eval-on-models.py and can be customized to use any model, model configuration or dataset. These are all command line supplied arguments. For this experiment I have used two models -
+
+ 1. GeminiPro
+ 2. CodeGecko
+```
 
 usage: run-human-eval-on-models.py [-h] [--project_id PROJECT_ID] [--location LOCATION] [--model MODEL] [--model_config MODEL_CONFIG]
 
 Parse arguments for interfacing with Vertex AI.
 
 options:
-  -h, --help            show this help message and exit
-  --project_id PROJECT_ID
-                        Project ID for the Vertex AI project. Default: 'spherical-frame-413020'
-  --location LOCATION   Location for the Vertex AI resources. Default: 'us-west4'
-  --model MODEL         Model identifier for use in predictions. Default: 'models.gemini_pro.GeminiPro', Other Model 'models.code_gecko.CodeGecko'
-  --model_config MODEL_CONFIG
-                        Model configurations can be overiden using this paramter. Default: empty json {}
 
-Example of files generated with every evaluation run ->
-File with sample -> GeminiPro20240204-231057.jsonl
-File with evaluation -> GeminiPro20240204-231057.jsonl_results.jsonl
-File with evaultion results -> GeminiPro20240204-231057.jsonl_results.jsonl
+-h, --help show this help message and exit
+
+--project_id PROJECT_ID
+
+Project ID for the Vertex AI project. Default: 'spherical-frame-413020'
+
+--location LOCATION Location for the Vertex AI resources. Default: 'us-west4'
+
+--model MODEL Model identifier for use in predictions. Default: 'models.gemini_pro.GeminiPro', Other Model 'models.code_gecko.CodeGecko'
+
+--model_config MODEL_CONFIG
+
+Model configurations can be overiden using this paramter. Default: empty json {}
+
+```
+
+After every LLM eval pipeline run the following  files will be generated -
+
+ 1. File with generated samples -> {model_name}{timestamp}.jsonl
+ 2. File with evaulated samples ->  {model_name}{timestamp}.jsonl_results.jsonl
+ 3. File with final evaultion results pass@k ->  {model_name}{timestamp}.jsonl_results.jsonl
+
+Results of some of the experiments are added in the experiments/ folder
+    
 
 ## Usage
 

@@ -12,6 +12,7 @@ import logging
 import time
 import json
 import subprocess
+import sys
 
 
 def parse_args() -> argparse.Namespace:
@@ -166,3 +167,4 @@ if __name__ == "__main__":
   
   # Run the file with generated samples with human-eval evaulation framework
   run_evaluation(file_with_samples)
+  sys.exit()
